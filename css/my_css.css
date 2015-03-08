@@ -1,0 +1,164 @@
+:root {
+  --main-color: #06c;
+  --accent-color: #006;
+}
+
+/*--------------------------------Container-----------------------------*/
+div.my-container{
+	
+	border-width: 1px;
+	border-style: solid;
+	border-color: #edb442;
+	box-sizing:border-box;
+	-moz-box-sizing: border-box;
+	background-color: #fff9d9;
+	border-top-right-radius: 5px;
+  	border-top-left-radius: 5px;
+
+}
+div.my-container-top-bar{
+	padding:4px 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #edb442;
+	width:100%;
+	background: -webkit-linear-gradient(#edb442, #fabd55); 
+  	background: -o-linear-gradient(#edb442, #fabd55); 
+  	background: -moz-linear-gradient(#edb442, #fabd55);
+  	background: linear-gradient(#edb442, #fabd55);
+  	border-top-right-radius: 3px;
+  	border-top-left-radius: 3px;
+  	color:white;
+  	font-weight: bold;
+  	box-sizing:border-box;
+  	-moz-box-sizing: border-box;
+}
+div.my-container-top-bar> .my-close-btn{
+	float:right;
+	width:15px;
+	height:15px;
+	background-image: url("../img/close.png");
+	cursor: pointer;
+	background-size: 100% 100%;
+}
+div.my-content{
+	padding:4px 4px;
+	text-align: center;
+}
+
+table.my-table-style1{
+	border-collapse: collapse;
+}
+table.my-table-style1 thead > td{
+	font-weight:bold;
+}
+
+table.my-table-style1 td{
+	border:solid 1px #edb442;
+	/*word-break:break-all;*/
+}
+/*-----------------------------------------------------------------------*/
+
+/*--------------------------------Utility--------------------------------*/
+.my-hidden{
+	display: none;
+}
+.my-show-block{
+	display: block;
+}
+.my-show-inline-block{
+	display: inline-block;
+}
+/*------------------------------------------------------------------------*/
+
+/*--------------------------------Inputs----------------------------------*/
+input,select{
+	padding: 3px;
+}
+.form input[type='text'].my-input,input[type='text'],input[type='number'],input[type='email']{
+	background: -webkit-linear-gradient(#ffffd9, #ffffd9); 
+  	background: -o-linear-gradient(#ffffd9, #ffffd9); 
+  	background: -moz-linear-gradient(#ffffd9, #ffffd9);
+  	background: linear-gradient(#ffffd9, #ffffd9);
+  	color:#edb442;
+  	border:solid 1px #edb442;
+  	padding: 4px;
+  	font-weight: bold;
+}
+.form input[type='text'].my-input:focus,input[type='text']:focus,input[type='number']:focus,input[type='email']:focus{
+	box-shadow: 0px 0px 2px 2px #edb442;
+}
+.form button.my-button1,select.my-input,button,select{
+	background: -webkit-linear-gradient(#edb442, #fabd55); 
+  	background: -o-linear-gradient(#edb442, #fabd55); 
+  	background: -moz-linear-gradient(#edb442, #fabd55);
+  	background: linear-gradient(#edb442, #fabd55);
+  	border-radius: 3px;
+  	color:white;
+  	font-weight: bold;
+  	border:solid 1px #edb442;
+}
+.form button.my-button1:hover,button:hover{
+	background-color: #fff9d9;
+	background: -webkit-linear-gradient(#ffffd9, #ffffd9); 
+  	background: -o-linear-gradient(#ffffd9, #ffffd9); 
+  	background: -moz-linear-gradient(#ffffd9, #ffffd9);
+  	background: linear-gradient(#ffffd9, #ffffd9);
+  	color:#edb442;
+  	cursor:pointer;
+}
+.form button.my-button1:active,button:active{
+	
+	background: -webkit-linear-gradient(#ffd599, #ffd599); 
+  	background: -o-linear-gradient(#ffd599, #ffd599); 
+  	background: -moz-linear-gradient(#ffd599, #ffd599);
+  	background: linear-gradient(#ffd599, #ffd599);
+  	color:#70450d;
+  	box-shadow: 0px 0px 2px 2px #edb442;
+}
+.form button.my-button1:focus,button:focus,input,select{
+	outline: none;
+	
+}
+.form select.my-input option,select option{
+	background-color: #fff9d9;
+  	color:#70450d;
+}
+
+
+/*------------------------------------------------------------------------*/
+/*-------------------------Sizes------------------------------------------*/
+.form button.medium{
+	height:50px;
+}
+
+.form button.small{
+	height:30px;
+}
+.fill{
+	min-width: 100%;
+	min-height: 100%;
+	box-sizing:border-box;
+  	-moz-box-sizing: border-box;
+}
+/*-------------------------------------------------------------------------*/
+.cursor-pointer{
+	cursor:pointer;
+}
+
+/*---------------------------------------------------------------------------*/
+/*-----------------------------------Lists-----------------------------------*/
+ol,ul{
+	padding:0;
+	margin:0;
+}
+.list-no-style{
+	list-style: none;
+	
+}
+/*---------------------------------------------------------------------------*/
+/*-----------------------------------Links-----------------------------------*/
+a.link{
+	text-decoration: none;
+}
+/*---------------------------------------------------------------------------*/
