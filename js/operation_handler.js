@@ -25,6 +25,32 @@ function add_room(name, telecom_no)
 	});
 }
 
+function get_dept(success,failed)
+{
+	var url = "controller/get_dept_info.php";
+	$.get(url,function(data,status){
+		var obj = JSON.parse(data);
+		if(obj.length)
+			success(obj);
+		else
+			failed();
+	});
+}
+
+function delete_dept(id,success,failed)
+{
+	var url = "controller/delete_dept_info.php?dept_id="+id;
+	$.get(url,function(data,status){
+		var obj = JSON.parse(data);
+		if(obj.result === "true")
+			success();
+		else
+			failed();
+	});
+}
+
+
+	
 /** Fetches rooms from webservice and invokes callbacks accordingly.*/
 function get_room(successCallback,failedCallback)
 {
@@ -217,6 +243,8 @@ function prepare_add_department()
 		
 	});
 }
+
+
 
 function update_place(room_id,emp_id)
 {

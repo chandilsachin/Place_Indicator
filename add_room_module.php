@@ -30,20 +30,20 @@
 	</table>
 </div>
 
-<div class="window my-container form" id="id_edit_room">
+<div class="window my-container" id="id_edit_room">
 	<div class="my-container-top-bar">Edit Room</div>
 	
-	<div id="list" class="list">
+	<div id="roomlist" class="list">
 		
 	</div>
 </div>
 <script>
 	function prepare_edit_room()
 	{
-		get_room(
-		function(obj){
-			$("#list").empty();
-			var list = $("#list");
+		get_room(function(obj){
+			
+			var list = $("#roomlist");
+			list.empty();
 			var table = $("<table class='my-table-style1'>");
 			var tr = $("<thead>");
 			
@@ -91,8 +91,7 @@
 			}
 			list.append(table);
 			$("#id_edit_room").show();
-		},
-		function(obj){
+		},function(obj){
 			
 		});
 	}
