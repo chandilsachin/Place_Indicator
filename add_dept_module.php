@@ -73,5 +73,5 @@
 			}
 		);
 	}
-	prepare_edit_dept();
+	
 </script>

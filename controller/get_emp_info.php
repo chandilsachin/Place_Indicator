@@ -3,7 +3,7 @@ $filter = $_GET["emp_name"];
 include 'initdata.php';
 
 $connection = new mysqli($host,$username,$password,$database);
-$command = "select * from employee";
+$command = "select name,designation,dept,emailid,(select name from room where id=room) as room from employee";
 if(	strcmp($filter, ""))
 	$command .= " where name like '".$filter."%'";
 

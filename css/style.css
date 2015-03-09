@@ -7,7 +7,7 @@ table{
 }
 
 td{
-	/* border:solid 1px black; */
+	padding:2px;
 }
 
 #id_add_room,#id_add_employee,#id_add_dept,#id_add_designation,#id_edit_designation{

@@ -154,33 +154,36 @@ function fill_dropdown_desig(dataObj,element_id)
 
 
 
-
-
-function prepare_edit_employee()
+function get_employee(success,failed)
 {
-	var container = document.getElementById("id_edit_employee");
 	var url = "controller/get_emp_info.php";
 	$.get(url,function(data,status){
 		var obj = JSON.parse(data);
 		if(obj.length)
-		{
-			fill_dropdown(obj,"select_emp_record");
-			$("#select_emp_record").change(function(){
-				prepare_edit_employee_window(obj,$(this).val());
-			});
-			container.style.display = "block";
-		}	
+			success(obj);
 		else
-			alert("Network problem");
+			failed();
 	});
 }
+
+function delete_employee(id,success,failed)
+{
+	var url = "controller/delete_employee_info.php?emp_id="+id;
+	$.get(url,function(data,status){
+		var obj = JSON.parse(data);
+		if(obj.result)
+			success(obj);
+		else
+			failed(obj);
+	});
+}
+
 
 function prepare_edit_employee_window(dataObj,value)
 {
 	document.getElementById("emp_name").value = dataObj[value].name;
 	document.getElementById("emp_designation").value = dataObj[value].designation;
 	document.getElementById("emp_department").value = dataObj[value].dept;
-	
 	
 	var url = "controller/get_room_info.php";
 	$.get(url,function(data,status){
@@ -278,3 +281,14 @@ function stringToBoolean(string){
 	}
 }
 
+function add_employee(name, designation,dept,room,email)
+{
+	var url = "controller/add_employee.php?emp_name="+name+"&emp_designation="+designation+"&emp_dept="+dept+"&emp_room="+room+"&emp_emailid="+email;
+	$.get(url,function(data,status){
+		var obj = JSON.parse(data);
+		if(obj.result)
+			alert("Added");
+		else
+			alert(obj.reason);
+	});
+}

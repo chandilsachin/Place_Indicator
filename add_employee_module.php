@@ -63,18 +63,6 @@
 		add_employee($("#emp_name").val(),$("#emp_designation").val(),$("#emp_department").val(),$("#emp_room").val(),$("#emp_emailid").val());
 	}
 
-	function add_employee(name, designation,dept,room,email)
-	{
-		var url = "controller/add_employee.php?emp_name="+name+"&emp_designation="+designation+"&emp_dept="+dept+"&emp_room="+room+"&emp_emailid="+email;
-		$.get(url,function(data,status){
-			var obj = JSON.parse(data);
-			if(obj.result)
-				alert("Added");
-			else
-				alert(obj.reason);
-		});
-	}
-
 	function prepare_add_employee()
 	{
 		var container = document.getElementById("id_add_employee");
@@ -112,4 +100,93 @@
 				alert("Network problem");
 		});
 	}
+</script>
+
+<div class="window my-container" id="id_edit_employee">
+	<div class="my-container-top-bar">Edit Employee</div>
+
+	<div class="list" id="empList"></div>
+</div>
+<script type="text/javascript">
+	function prepare_edit_employee()
+	{
+		var container = $("#id_edit_employee");
+		get_employee(function(obj){
+
+			var list = $("#empList");
+			list.empty();
+			var table = $("<table class='my-table-style1'>");
+			var tr = $("<thead>");
+			var td = $("<td>");
+			td.html("Name");
+			tr.append(td);
+
+			td = $("<td>");
+			td.html("Designation");
+			tr.append(td);
+
+			td = $("<td>");
+			td.html("Department");
+			tr.append(td);
+
+			td = $("<td>");
+			td.html("Email Id");
+			tr.append(td);
+
+			td = $("<td>");
+			td.html("Room");
+			tr.append(td);
+
+			td = $("<td>");
+			tr.append(td);
+			table.append(tr);
+			for(var i=0;i<obj.length;i++)
+			{
+				var tr = $("<tr>");
+				var td = $("<td>");
+				td.html(obj[i].name);
+				tr.append(td);
+
+				td = $("<td>");
+				td.html(obj[i].designation);
+				tr.append(td);
+
+				td = $("<td>");
+				td.html(obj[i].dept);
+				tr.append(td);
+
+				td = $("<td>");
+				td.html(obj[i].emailid);
+				tr.append(td);
+
+				td = $("<td>");
+				td.html(obj[i].room);
+				tr.append(td);
+
+				td = $("<td>");
+				var hiddenInput = $("<input type='hidden'>");
+				hiddenInput.val(obj[i].id);
+				td.append(hiddenInput);
+				var link = $("<a class='link' href='#'>Delete</a>");
+				link.click(function(){
+					var row = $(this).parent().parent();
+					 delete_employee($(this).prev().val(), 
+						function(obj){
+							row.detach();
+						},
+						function(obj){
+							alert(obj.reason);
+						});
+				});
+				td.append(link);
+				tr.append(td);
+				table.append(tr);
+			}
+			list.append(table);
+			container.show();
+		}, function(){
+				alert("Error");
+			});
+	}
+	prepare_edit_employee();
 </script>

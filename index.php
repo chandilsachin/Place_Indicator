@@ -39,7 +39,7 @@
 							<a href="#" onclick="reset();prepare_add_department()">Add department</a>
 						</li>
 						<li>
-							<a href="#" onclick="reset();">Edit department info</a>
+							<a href="#" onclick="reset();prepare_edit_dept();">Edit department info</a>
 						</li>
 						<li>
 							<a href="#" onclick="reset();prepare_add_designation()">Add Designation</a>
