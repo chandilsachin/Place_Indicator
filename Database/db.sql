@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: place_indicator
 -- ------------------------------------------------------
--- Server version	5.5.38-0+wheezy1
+-- Server version	5.5.41-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -39,6 +39,7 @@ CREATE TABLE `current_place` (
 
 LOCK TABLES `current_place` WRITE;
 /*!40000 ALTER TABLE `current_place` DISABLE KEYS */;
+INSERT INTO `current_place` VALUES (25,22,'10:00:00'),(26,32,'10:00:00');
 /*!40000 ALTER TABLE `current_place` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +62,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES ('Pharm'),('Pharma'),('research');
+INSERT INTO `department` VALUES ('Pharma'),('research');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,6 +85,7 @@ CREATE TABLE `designation` (
 
 LOCK TABLES `designation` WRITE;
 /*!40000 ALTER TABLE `designation` DISABLE KEYS */;
+INSERT INTO `designation` VALUES ('Android Developer'),('Data Maker'),('iOS Developer');
 /*!40000 ALTER TABLE `designation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,14 +102,17 @@ CREATE TABLE `employee` (
   `designation` varchar(30) DEFAULT NULL,
   `dept` varchar(30) DEFAULT NULL,
   `room` int(2) DEFAULT NULL,
+  `emailid` varchar(30) DEFAULT NULL,
+  `gender` char(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `emailid` (`emailid`),
   KEY `room` (`room`),
   KEY `dept` (`dept`),
   KEY `designation` (`designation`),
-  CONSTRAINT `employee_ibfk_3` FOREIGN KEY (`designation`) REFERENCES `designation` (`designation`),
   CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`room`) REFERENCES `room` (`id`),
-  CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`dept`) REFERENCES `department` (`dept`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`dept`) REFERENCES `department` (`dept`),
+  CONSTRAINT `employee_ibfk_3` FOREIGN KEY (`designation`) REFERENCES `designation` (`designation`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,8 +121,24 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (25,'Sachin Chandil','Android Developer','research',22,'chandilsachin@gmail.com',NULL),(26,'Vinay','iOS Developer','research',32,'vinay.jn@gmail.com',NULL);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 trigger initial_place after insert on employee for each row begin insert into current_place values(new.id,new.room,'10:00:00'); end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `room`
@@ -132,7 +153,7 @@ CREATE TABLE `room` (
   `telecom_no` int(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,7 +162,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (13,'U1',301),(14,'U2',302),(15,'U4',304),(16,'U5',305),(17,'U6',306);
+INSERT INTO `room` VALUES (13,'U1',301),(17,'U6',306),(22,'A1',321),(30,'S2',322),(31,'A7',353),(32,'A6',352);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -154,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-28  0:50:28
+-- Dump completed on 2015-03-09 23:57:18
