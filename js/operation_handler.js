@@ -33,7 +33,7 @@ function get_dept(success,failed)
 		if(obj.length)
 			success(obj);
 		else
-			failed();
+			failed(obj);
 	});
 }
 
@@ -42,10 +42,10 @@ function delete_dept(id,success,failed)
 	var url = "controller/delete_dept_info.php?dept_id="+id;
 	$.get(url,function(data,status){
 		var obj = JSON.parse(data);
-		if(obj.result === "true")
-			success();
+		if(obj.result)
+			success(obj);
 		else
-			failed();
+			failed(obj);
 	});
 }
 
@@ -162,7 +162,7 @@ function get_employee(success,failed)
 		if(obj.length)
 			success(obj);
 		else
-			failed();
+			failed(obj);
 	});
 }
 
@@ -225,16 +225,6 @@ function prepare_add_room()
 	});
 }
 
-function prepare_edit_room()
-{
-	var container = document.getElementById("id_add_room");
-	var url = "controller/get_room_info.php";
-	$.get(url,function(data,status){
-		var obj = JSON.parse(data);
-		container.style.display = "block";
-		
-	});
-}
 
 function prepare_add_department()
 {

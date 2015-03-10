@@ -57,9 +57,13 @@
 					td = $("<td>");
 					var link = $("<a href='#' class='link'>Delete</a>");
 					link.click(function(){
-						delete_dept($(this).parent().prev().html(),function(){
-							$(this).parent().parent().detach();
-							},function(){alert("Error")});
+						var container = $(this).parent().parent();
+						delete_dept($(this).parent().prev().html(),
+							  function(obj){
+							container.detach();
+							},function(obj){
+								alert(obj.reason);
+							});
 					});
 					td.append(link);
 					tr.append(td);
@@ -68,8 +72,11 @@
 				list.append(table);
 				$("#id_edit_dept").show();
 			},
-			 function(){
-
+			 function(obj){
+				if(!obj.length)
+					alert("No departments are listed in database.");
+				else
+					alert(obj.reason);
 			}
 		);
 	}

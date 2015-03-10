@@ -11,10 +11,10 @@ $result = $connection->query($command);
 $len = $result->num_rows;
 if($result === TRUE)
 {
-	$jsonObj .= "\"result\":\"true\"";
+	$jsonObj .= "\"result\":1";
 }
 else
-	$jsonObj .= "\"result\":\"false\"";
+	$jsonObj .= "\"result\":0,\"reason\":\"".$connection->error."\"";
 $jsonObj .= "}";
 echo $jsonObj;
 $connection->close();

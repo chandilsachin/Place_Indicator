@@ -75,7 +75,7 @@
 				container.style.display = "block";
 			}	
 			else
-				alert("Network problem");
+				alert("No Room is listed in Database.");
 		});
 		url = "controller/get_desig_info.php";
 		$.get(url,function(data,status){
@@ -86,7 +86,7 @@
 				container.style.display = "block";
 			}	
 			else
-				alert("Network problem");
+				alert("No Designation is listed in Database.");
 		});
 		url = "controller/get_dept_info.php";
 		$.get(url,function(data,status){
@@ -97,7 +97,7 @@
 				container.style.display = "block";
 			}	
 			else
-				alert("Network problem");
+				alert("No Department is listed in Database.");
 		});
 	}
 </script>
@@ -184,9 +184,12 @@
 			}
 			list.append(table);
 			container.show();
-		}, function(){
-				alert("Error");
+		}, function(obj){
+				if(!obj.length)
+					alert("No Employee is listed in Database.");
+				else
+					alert(obj.reason);
 			});
 	}
-	prepare_edit_employee();
+
 </script>

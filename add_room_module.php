@@ -92,7 +92,10 @@
 			list.append(table);
 			$("#id_edit_room").show();
 		},function(obj){
-			
+			if(!obj.length)
+				alert("No Room is listed in Database.");
+			else
+				alert(obj.reason);
 		});
 	}
 	

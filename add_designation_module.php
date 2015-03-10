@@ -52,8 +52,13 @@ function prepare_edit_designation()
 	$.get(url,function(data,status){
 		var obj = JSON.parse(data);
 		$(document.getElementById("listDesig")).empty();
-		document.getElementById("listDesig").appendChild(inflateListItem(obj));
-		container.style.display = "block";
+		if(obj.length)
+		{
+			document.getElementById("listDesig").appendChild(inflateListItem(obj));
+			container.style.display = "block";
+		}
+		else
+			alert("No Designation is listed in Database.");
 		
 	});
 }
