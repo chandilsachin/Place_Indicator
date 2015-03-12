@@ -19,11 +19,16 @@
 					
 				</td>
 			</tr>
+			<tr>
+				<td id="other">
+					
+				</td>
+			</tr>
 		</table>
 	</div>
 </div>
 <script>
-function prepare_place_window(emp_id)
+function prepare_place_window(emp_id,room_name)
 {
 	var container = document.getElementById("id_place_window");
 	var url = "controller/get_room_info.php";
@@ -33,6 +38,7 @@ function prepare_place_window(emp_id)
 		var aContainer = document.getElementById("A");
 		var sContainer = document.getElementById("S");
 		var uContainer = document.getElementById("U");
+		var other = document.getElementById("other");
 		$(aContainer).empty();
 		$(sContainer).empty();
 		$(uContainer).empty();
@@ -44,6 +50,7 @@ function prepare_place_window(emp_id)
 			button.innerHTML = obj[i].name;
 			button.onclick = function(){
 				var room_id = this.value;
+				if(room_name != this.innerHTML)
 				update_place(room_id,emp_id,prepare_list);
 					
 				document.getElementById("id_place_window").style.display = "none";
@@ -54,6 +61,8 @@ function prepare_place_window(emp_id)
 				sContainer.appendChild(button);
 			else if(button.innerHTML.indexOf("U")==0)
 				uContainer.appendChild(button);
+			else
+				other.appendChild(button);
 		}
 	});
 	var window = document.getElementById("id-close-place-window");

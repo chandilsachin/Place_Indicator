@@ -21,9 +21,9 @@
 		<?php include "place_management.php"; ?>
 	</body>
 	<script type="text/javascript">
+	var empid_roomid_mapping = [];
 		function prepare_list()
 		{
-			setInterval(function(){update_time()},1000);
 			var container = document.getElementById("list");
 			var div;
 			var url = "controller/get_emp_location.php";
@@ -52,11 +52,11 @@
 					tr.appendChild(td);
 
 					td = document.createElement("td");
-					td.innerHTML = "Extension";
+					td.innerHTML = "Current Extension";
 					tr.appendChild(td);
 
 					td = document.createElement("td");
-					td.innerHTML = "From";
+					td.innerHTML = "Since";
 					tr.appendChild(td);
 					container.appendChild(tr);
 
@@ -78,26 +78,26 @@
 						tr.appendChild(td);
 
 						td = document.createElement("td");
-						td.innerHTML = obj[i].usual_place;
+						td.innerHTML = obj[i].usual_place+" ("+obj[i].telecom_no+")";
 						tr.appendChild(td);
 
 						td = document.createElement("td");
 						td.innerHTML = obj[i].room_name;
 						td.value = obj[i].id;
+						empid_roomid_mapping[obj[i].id] = obj[i].room_name;
 						td.className += "cursor-pointer";
 						/*Click event of current room block */
 						td.onclick = function(ev){
-							
-							show_place_grid(this.value,ev);
+							show_place_grid(this.value,ev,empid_roomid_mapping[this.value]);
 						};
 						tr.appendChild(td);
 
 						td = document.createElement("td");
-						td.innerHTML = obj[i].telecom_no;
+						td.innerHTML = obj[i].updated_telecom_no;
 						tr.appendChild(td);
 
 						td = document.createElement("td");
-						td.innerHTML = format_time(obj[i].time);
+						td.innerHTML = format_readable_time(calculate_time_diff(obj[i].time, obj[i].time));
 						tr.appendChild(td);
 						container.appendChild(tr);
 
@@ -105,9 +105,9 @@
 				}
 			});
 		}
-		function show_place_grid(emp_id,ev)
+		function show_place_grid(emp_id,ev,room_name)
 		{
-			prepare_place_window(emp_id);
+			prepare_place_window(emp_id,room_name);
 			var listContainer = document.getElementById("id_place_window");
 			listContainer.style.display = "block";
 			if(ev.x+listContainer.offsetWidth > window.innerWidth)
@@ -133,6 +133,31 @@
 			var date = new Date();
 			document.getElementById("current_time").innerHTML = format_time(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
 		}
+		function calculate_time_diff(time1)
+		{
+			var currentDate = new Date();
+			var time = time1.split(":");
+			var date1 = new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate(),time[0],time[1],time[2],0);
+			return parseInt(currentDate - date1);
+		}
+		function format_readable_time(miliseconds)
+		{
+			var mins = parseInt(miliseconds / 60000);
+			var hrs = parseInt(mins / 60);
+			mins = mins % 60;
+			var str = "";
+			if(hrs > 1)
+				str = hrs+" hrs";
+			else if(hrs == 1)
+				str = hrs+" hr";
+			if(mins > 1)
+				str += mins+" mins";
+			else if(mins <= 1)
+				str += mins+" min";
+			return str;
+		}
+		setInterval(function(){update_time()},1000);
+		setInterval(function(){prepare_list()},1000*60);
 		prepare_list();	
 	</script>
 </html>
